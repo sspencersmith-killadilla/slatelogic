@@ -10,33 +10,108 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProjectIdRouteImport } from './routes/project/$id'
+import { Route as ProjectIdIndexRouteImport } from './routes/project/$id.index'
+import { Route as ProjectIdCostsRouteImport } from './routes/project/$id.costs'
+import { Route as ProjectIdPrintRouteImport } from './routes/project/$id.print'
+import { Route as ProjectIdScheduleRouteImport } from './routes/project/$id.schedule'
+import { Route as ProjectIdScriptRouteImport } from './routes/project/$id.script'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectIdRoute = ProjectIdRouteImport.update({
+  id: '/project/$id',
+  path: '/project/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectIdIndexRoute = ProjectIdIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectIdRoute,
+} as any)
+const ProjectIdCostsRoute = ProjectIdCostsRouteImport.update({
+  id: '/costs',
+  path: '/costs',
+  getParentRoute: () => ProjectIdRoute,
+} as any)
+const ProjectIdPrintRoute = ProjectIdPrintRouteImport.update({
+  id: '/print',
+  path: '/print',
+  getParentRoute: () => ProjectIdRoute,
+} as any)
+const ProjectIdScheduleRoute = ProjectIdScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => ProjectIdRoute,
+} as any)
+const ProjectIdScriptRoute = ProjectIdScriptRouteImport.update({
+  id: '/script',
+  path: '/script',
+  getParentRoute: () => ProjectIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/project/$id': typeof ProjectIdRouteWithChildren
+  '/project/$id/costs': typeof ProjectIdCostsRoute
+  '/project/$id/print': typeof ProjectIdPrintRoute
+  '/project/$id/schedule': typeof ProjectIdScheduleRoute
+  '/project/$id/script': typeof ProjectIdScriptRoute
+  '/project/$id/': typeof ProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/project/$id/costs': typeof ProjectIdCostsRoute
+  '/project/$id/print': typeof ProjectIdPrintRoute
+  '/project/$id/schedule': typeof ProjectIdScheduleRoute
+  '/project/$id/script': typeof ProjectIdScriptRoute
+  '/project/$id': typeof ProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/project/$id': typeof ProjectIdRouteWithChildren
+  '/project/$id/costs': typeof ProjectIdCostsRoute
+  '/project/$id/print': typeof ProjectIdPrintRoute
+  '/project/$id/schedule': typeof ProjectIdScheduleRoute
+  '/project/$id/script': typeof ProjectIdScriptRoute
+  '/project/$id/': typeof ProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/project/$id'
+    | '/project/$id/costs'
+    | '/project/$id/print'
+    | '/project/$id/schedule'
+    | '/project/$id/script'
+    | '/project/$id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/project/$id/costs'
+    | '/project/$id/print'
+    | '/project/$id/schedule'
+    | '/project/$id/script'
+    | '/project/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/project/$id'
+    | '/project/$id/costs'
+    | '/project/$id/print'
+    | '/project/$id/schedule'
+    | '/project/$id/script'
+    | '/project/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProjectIdRoute: typeof ProjectIdRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +123,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/project/$id': {
+      id: '/project/$id'
+      path: '/project/$id'
+      fullPath: '/project/$id'
+      preLoaderRoute: typeof ProjectIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/project/$id/': {
+      id: '/project/$id/'
+      path: '/'
+      fullPath: '/project/$id/'
+      preLoaderRoute: typeof ProjectIdIndexRouteImport
+      parentRoute: typeof ProjectIdRoute
+    }
+    '/project/$id/costs': {
+      id: '/project/$id/costs'
+      path: '/costs'
+      fullPath: '/project/$id/costs'
+      preLoaderRoute: typeof ProjectIdCostsRouteImport
+      parentRoute: typeof ProjectIdRoute
+    }
+    '/project/$id/print': {
+      id: '/project/$id/print'
+      path: '/print'
+      fullPath: '/project/$id/print'
+      preLoaderRoute: typeof ProjectIdPrintRouteImport
+      parentRoute: typeof ProjectIdRoute
+    }
+    '/project/$id/schedule': {
+      id: '/project/$id/schedule'
+      path: '/schedule'
+      fullPath: '/project/$id/schedule'
+      preLoaderRoute: typeof ProjectIdScheduleRouteImport
+      parentRoute: typeof ProjectIdRoute
+    }
+    '/project/$id/script': {
+      id: '/project/$id/script'
+      path: '/script'
+      fullPath: '/project/$id/script'
+      preLoaderRoute: typeof ProjectIdScriptRouteImport
+      parentRoute: typeof ProjectIdRoute
+    }
   }
 }
 
+interface ProjectIdRouteChildren {
+  ProjectIdCostsRoute: typeof ProjectIdCostsRoute
+  ProjectIdPrintRoute: typeof ProjectIdPrintRoute
+  ProjectIdScheduleRoute: typeof ProjectIdScheduleRoute
+  ProjectIdScriptRoute: typeof ProjectIdScriptRoute
+  ProjectIdIndexRoute: typeof ProjectIdIndexRoute
+}
+
+const ProjectIdRouteChildren: ProjectIdRouteChildren = {
+  ProjectIdCostsRoute: ProjectIdCostsRoute,
+  ProjectIdPrintRoute: ProjectIdPrintRoute,
+  ProjectIdScheduleRoute: ProjectIdScheduleRoute,
+  ProjectIdScriptRoute: ProjectIdScriptRoute,
+  ProjectIdIndexRoute: ProjectIdIndexRoute,
+}
+
+const ProjectIdRouteWithChildren = ProjectIdRoute._addFileChildren(
+  ProjectIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProjectIdRoute: ProjectIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

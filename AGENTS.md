@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All app data lives in a persisted Zustand store (src/lib/store) in localStorage; no backend — keeps the tool zero-setup, JSON export is the backup path.
+- Cost model (src/lib/cost/model.ts) is pure functions shared by the UI and the optimizer worker — one source of truth for every cost shown.
+- Script parsing runs client-side with dynamically imported pdfjs-dist/mammoth so SSR never loads them.

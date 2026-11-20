@@ -10,6 +10,14 @@ export interface Scene {
   eighths: number;
   hours: number;
   cast: string[];
+  frames?: Frame[];
+}
+export interface Frame {
+  id: string;
+  shot: string;
+  note: string;
+  imageKey: string;
+  createdAt: number;
 }
 export interface Settings {
   locationDayRate: number;
@@ -36,6 +44,8 @@ export interface Project {
   settings: Settings;
   days: ShootDay[];
   sourceNotice?: string | null;
+  storyboardEnabled?: boolean;
+  storyboardStyle?: "pencil" | "ink" | "comic";
 }
 export const defaultSettings = (): Settings => ({
   locationDayRate: 1500,

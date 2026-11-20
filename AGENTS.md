@@ -36,3 +36,7 @@ use the editor.
 - Keep the existing persistence key across brand changes to preserve saved productions.
 - Seed the attributed screenplay example once after browser-store hydration, with a persisted marker so deleted examples stay deleted.
 - Keep bundled screenplay attribution separate from the software license because third-party content retains its own license.
+
+## Project rules (storyboard)
+- Storyboard images live in IndexedDB (src/lib/storyboard/imageStore.ts), keyed from Frame.imageKey; the persisted store keeps only frame metadata — images would exceed localStorage quota.
+- AI storyboard frames are generated only when Project.storyboardEnabled is true (canGenerate), via the streaming /api/storyboard-frame route.

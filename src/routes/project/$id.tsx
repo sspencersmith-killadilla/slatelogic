@@ -16,7 +16,8 @@ const tabs = [
   { to: "/project/$id/script", label: "1 · Script & Scenes" },
   { to: "/project/$id/costs", label: "2 · Cost Weights" },
   { to: "/project/$id/schedule", label: "3 · Stripboard" },
-  { to: "/project/$id/print", label: "4 · Print" },
+  { to: "/project/$id/storyboard", label: "4 · Storyboard" },
+  { to: "/project/$id/print", label: "5 · Print" },
 ] as const;
 
 function Layout() {

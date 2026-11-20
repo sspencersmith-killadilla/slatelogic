@@ -10,16 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiStoryboardFrameRouteImport } from './routes/api/storyboard-frame'
 import { Route as ProjectIdRouteImport } from './routes/project/$id'
 import { Route as ProjectIdIndexRouteImport } from './routes/project/$id.index'
 import { Route as ProjectIdCostsRouteImport } from './routes/project/$id.costs'
 import { Route as ProjectIdPrintRouteImport } from './routes/project/$id.print'
 import { Route as ProjectIdScheduleRouteImport } from './routes/project/$id.schedule'
 import { Route as ProjectIdScriptRouteImport } from './routes/project/$id.script'
+import { Route as ProjectIdStoryboardRouteImport } from './routes/project/$id.storyboard'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStoryboardFrameRoute = ApiStoryboardFrameRouteImport.update({
+  id: '/api/storyboard-frame',
+  path: '/api/storyboard-frame',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectIdRoute = ProjectIdRouteImport.update({
@@ -52,65 +59,83 @@ const ProjectIdScriptRoute = ProjectIdScriptRouteImport.update({
   path: '/script',
   getParentRoute: () => ProjectIdRoute,
 } as any)
+const ProjectIdStoryboardRoute = ProjectIdStoryboardRouteImport.update({
+  id: '/storyboard',
+  path: '/storyboard',
+  getParentRoute: () => ProjectIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/storyboard-frame': typeof ApiStoryboardFrameRoute
   '/project/$id': typeof ProjectIdRouteWithChildren
   '/project/$id/costs': typeof ProjectIdCostsRoute
   '/project/$id/print': typeof ProjectIdPrintRoute
   '/project/$id/schedule': typeof ProjectIdScheduleRoute
   '/project/$id/script': typeof ProjectIdScriptRoute
+  '/project/$id/storyboard': typeof ProjectIdStoryboardRoute
   '/project/$id/': typeof ProjectIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/storyboard-frame': typeof ApiStoryboardFrameRoute
   '/project/$id/costs': typeof ProjectIdCostsRoute
   '/project/$id/print': typeof ProjectIdPrintRoute
   '/project/$id/schedule': typeof ProjectIdScheduleRoute
   '/project/$id/script': typeof ProjectIdScriptRoute
+  '/project/$id/storyboard': typeof ProjectIdStoryboardRoute
   '/project/$id': typeof ProjectIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/storyboard-frame': typeof ApiStoryboardFrameRoute
   '/project/$id': typeof ProjectIdRouteWithChildren
   '/project/$id/costs': typeof ProjectIdCostsRoute
   '/project/$id/print': typeof ProjectIdPrintRoute
   '/project/$id/schedule': typeof ProjectIdScheduleRoute
   '/project/$id/script': typeof ProjectIdScriptRoute
+  '/project/$id/storyboard': typeof ProjectIdStoryboardRoute
   '/project/$id/': typeof ProjectIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/api/storyboard-frame'
     | '/project/$id'
     | '/project/$id/costs'
     | '/project/$id/print'
     | '/project/$id/schedule'
     | '/project/$id/script'
+    | '/project/$id/storyboard'
     | '/project/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/api/storyboard-frame'
     | '/project/$id/costs'
     | '/project/$id/print'
     | '/project/$id/schedule'
     | '/project/$id/script'
+    | '/project/$id/storyboard'
     | '/project/$id'
   id:
     | '__root__'
     | '/'
+    | '/api/storyboard-frame'
     | '/project/$id'
     | '/project/$id/costs'
     | '/project/$id/print'
     | '/project/$id/schedule'
     | '/project/$id/script'
+    | '/project/$id/storyboard'
     | '/project/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiStoryboardFrameRoute: typeof ApiStoryboardFrameRoute
   ProjectIdRoute: typeof ProjectIdRouteWithChildren
 }
 
@@ -121,6 +146,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/storyboard-frame': {
+      id: '/api/storyboard-frame'
+      path: '/api/storyboard-frame'
+      fullPath: '/api/storyboard-frame'
+      preLoaderRoute: typeof ApiStoryboardFrameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/project/$id': {
@@ -165,6 +197,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectIdScriptRouteImport
       parentRoute: typeof ProjectIdRoute
     }
+    '/project/$id/storyboard': {
+      id: '/project/$id/storyboard'
+      path: '/storyboard'
+      fullPath: '/project/$id/storyboard'
+      preLoaderRoute: typeof ProjectIdStoryboardRouteImport
+      parentRoute: typeof ProjectIdRoute
+    }
   }
 }
 
@@ -173,6 +212,7 @@ interface ProjectIdRouteChildren {
   ProjectIdPrintRoute: typeof ProjectIdPrintRoute
   ProjectIdScheduleRoute: typeof ProjectIdScheduleRoute
   ProjectIdScriptRoute: typeof ProjectIdScriptRoute
+  ProjectIdStoryboardRoute: typeof ProjectIdStoryboardRoute
   ProjectIdIndexRoute: typeof ProjectIdIndexRoute
 }
 
@@ -181,6 +221,7 @@ const ProjectIdRouteChildren: ProjectIdRouteChildren = {
   ProjectIdPrintRoute: ProjectIdPrintRoute,
   ProjectIdScheduleRoute: ProjectIdScheduleRoute,
   ProjectIdScriptRoute: ProjectIdScriptRoute,
+  ProjectIdStoryboardRoute: ProjectIdStoryboardRoute,
   ProjectIdIndexRoute: ProjectIdIndexRoute,
 }
 
@@ -190,6 +231,7 @@ const ProjectIdRouteWithChildren = ProjectIdRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiStoryboardFrameRoute: ApiStoryboardFrameRoute,
   ProjectIdRoute: ProjectIdRouteWithChildren,
 }
 export const routeTree = rootRouteImport

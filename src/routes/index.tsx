@@ -11,9 +11,9 @@ import type { Project } from "@/lib/types";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "StripCost — Script to cost-optimized stripboard" },
+      { title: "SlateLogic — Script to cost-optimized stripboard" },
       { name: "description", content: "Upload a screenplay, break it into scenes and build a shooting schedule that minimizes location, move and cast costs." },
-      { property: "og:title", content: "StripCost — Script to cost-optimized stripboard" },
+      { property: "og:title", content: "SlateLogic — Script to cost-optimized stripboard" },
       { property: "og:description", content: "Break down your script and generate a cost-minimizing shooting schedule." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -39,14 +39,14 @@ function Index() {
       if (!Array.isArray(p.scenes)) throw new Error();
       const id = importProject(p);
       void nav({ to: "/project/$id/schedule", params: { id } });
-    } catch { toast.error("That file isn't a StripCost project export."); }
+    } catch { toast.error("That file isn't a SlateLogic project export."); }
   };
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-14">
       <header className="mb-12 border-b-4 border-double border-foreground pb-8">
-        <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">CallSheet /</p>
-        <h1 className="text-6xl font-bold uppercase leading-none md:text-8xl">StripCost</h1>
+        <img src="/favicon.png" alt="" width={48} height={48} className="mb-3" />
+        <h1 className="text-5xl font-bold uppercase leading-none md:text-8xl">SlateLogic</h1>
         <p className="mt-4 max-w-2xl font-mono text-base text-muted-foreground">
           Drop in a screenplay. Get scene breakdowns, a stripboard and a shooting order that keeps location, move and cast costs down.
         </p>
@@ -78,6 +78,11 @@ function Index() {
           ))}
         </ul>
       )}
+      <footer className="mt-10 border-t border-border pt-4 font-mono text-xs text-muted-foreground">
+        <a href="/license.txt" className="underline">MIT license · © 2026 Spencer Smith</a>
+        <span className="mx-2">·</span>
+        <a href="https://durian.blender.org/sharing/" target="_blank" rel="noreferrer" className="underline">Sintel excerpt: © Blender Foundation · CC BY 3.0</a>
+      </footer>
     </main>
   );
 }

@@ -11,25 +11,34 @@ import { parseScript } from "@/lib/parser/scenes";
 import { SAMPLE_SCRIPT } from "@/lib/sample";
 import { fmtEighths, uid, type Scene } from "@/lib/types";
 import { greedy } from "@/lib/cost/optimize";
+import { createDemoProject } from "@/lib/store/demo";
 
-export const Route = createFileRoute("/project/$id/script")({ component: ScriptPage });
+export const Route = createFileRoute("/project/$id/script")({ head: () => ({ meta: [
+    { title: "Script & Scenes — SlateLogic" },
+    { name: "description", content: "Review and edit screenplay scenes, locations, cast and estimated shooting durations." },
+    { property: "og:title", content: "Script & Scenes — SlateLogic" },
+    { property: "og:description", content: "Review and edit screenplay scenes, locations, cast and estimated shooting durations." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }), component: ScriptPage });
 
 const cell = "h-8 border-transparent bg-transparent px-1 font-mono text-sm shadow-none focus-visible:border-input focus-visible:bg-background";
 
 function ScriptPage() {
   const { id } = Route.useParams();
   const p = useProject(id)!;
-  const { setScenes, setDays } = useProjects();
+  const { setScenes, setDays, update } = useProjects();
   const [busy, setBusy] = useState(false);
   const [q, setQ] = useState("");
   const [sel, setSel] = useState<Set<string>>(new Set());
   const fileRef = useRef<HTMLInputElement>(null);
   const nav = useNavigate();
 
-  const load = (text: string) => {
+  const load = (text: string, sourceNotice: string | null = null) => {
     const scenes = parseScript(text);
     if (!scenes.length) { toast.error("No scene headings found (looking for lines like “INT. KITCHEN - DAY”)."); return; }
     setScenes(id, scenes); setDays(id, []); setSel(new Set());
+    update(id, () => ({ sourceNotice }));
     toast.success(`Found ${scenes.length} scenes`);
   };
   const onFile = async (f: File) => {
@@ -73,7 +82,7 @@ function ScriptPage() {
           <div className="text-muted-foreground">Drag it here or choose a file. Re-uploading replaces the scene list.</div>
         </div>
         <Button onClick={() => fileRef.current?.click()} disabled={busy}>{busy ? <Loader2 className="animate-spin" /> : <FileText />} Choose file</Button>
-        <Button variant="outline" onClick={() => load(SAMPLE_SCRIPT)}>Use sample script</Button>
+        <Button variant="outline" onClick={() => load(SAMPLE_SCRIPT, createDemoProject().sourceNotice ?? null)}>Use Sintel excerpt</Button>
         <input ref={fileRef} type="file" accept=".pdf,.docx,.doc,.txt,.fountain" hidden onChange={(e) => { const f = e.target.files?.[0]; if (f) void onFile(f); e.target.value = ""; }} />
       </section>
 

@@ -15,6 +15,10 @@ export function scheduleCsv(p: Project) {
   const scheduled = new Set(p.days.flatMap((d) => d.sceneIds));
   p.scenes.filter((s) => !scheduled.has(s.id)).forEach((s) =>
     rows.push(["Unscheduled", "", s.number, s.intExt, s.time, s.location, s.eighths, s.hours, s.cast.join("; "), s.synopsis, ""]));
+  if (p.sourceNotice) {
+    rows[0]?.push("Source attribution");
+    rows.slice(1).forEach((row) => row.push(p.sourceNotice));
+  }
   return toCsv(rows);
 }
 export function doodCsv(p: Project) {

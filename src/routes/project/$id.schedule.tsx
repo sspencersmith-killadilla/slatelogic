@@ -16,7 +16,14 @@ import { StripBody } from "@/components/app/Strip";
 import { download, doodCsv, scheduleCsv, slug } from "@/lib/export";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/project/$id/schedule")({ component: SchedulePage });
+export const Route = createFileRoute("/project/$id/schedule")({ head: () => ({ meta: [
+    { title: "Stripboard — SlateLogic" },
+    { name: "description", content: "Arrange shoot days, optimize production costs and review cast Day-Out-of-Days." },
+    { property: "og:title", content: "Stripboard — SlateLogic" },
+    { property: "og:description", content: "Arrange shoot days, optimize production costs and review cast Day-Out-of-Days." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }), component: SchedulePage });
 
 const UNSCHED = "unscheduled";
 

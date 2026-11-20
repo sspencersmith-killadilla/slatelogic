@@ -35,6 +35,7 @@ export interface Project {
   scenes: Scene[];
   settings: Settings;
   days: ShootDay[];
+  sourceNotice?: string | null;
 }
 export const defaultSettings = (): Settings => ({
   locationDayRate: 1500,

@@ -8,7 +8,14 @@ import { fmtEighths, money } from "@/lib/types";
 import { StripBody } from "@/components/app/Strip";
 import { castIdMap } from "./$id.schedule";
 
-export const Route = createFileRoute("/project/$id/print")({ component: PrintPage });
+export const Route = createFileRoute("/project/$id/print")({ head: () => ({ meta: [
+    { title: "Printable Schedule — SlateLogic" },
+    { name: "description", content: "Print a day-by-day shooting schedule with scene strips, cast and estimated costs." },
+    { property: "og:title", content: "Printable Schedule — SlateLogic" },
+    { property: "og:description", content: "Print a day-by-day shooting schedule with scene strips, cast and estimated costs." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }), component: PrintPage });
 
 function PrintPage() {
   const { id } = Route.useParams();

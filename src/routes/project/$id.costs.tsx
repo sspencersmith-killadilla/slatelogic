@@ -7,7 +7,14 @@ import { useProjects } from "@/lib/store/projects";
 import { useProject } from "@/lib/store/useReady";
 import { defaultSettings, money, type Settings } from "@/lib/types";
 
-export const Route = createFileRoute("/project/$id/costs")({ component: CostsPage });
+export const Route = createFileRoute("/project/$id/costs")({ head: () => ({ meta: [
+    { title: "Cost Weights — SlateLogic" },
+    { name: "description", content: "Adjust location, cast, move and turnaround costs for your shooting schedule." },
+    { property: "og:title", content: "Cost Weights — SlateLogic" },
+    { property: "og:description", content: "Adjust location, cast, move and turnaround costs for your shooting schedule." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }), component: CostsPage });
 
 type NumKey = { [K in keyof Settings]: Settings[K] extends number ? K : never }[keyof Settings];
 const fields: { k: NumKey; label: string; hint: string; max: number; step: number; unit?: "$" | "8ths" | "hrs" }[] = [

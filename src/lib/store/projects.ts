@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { type Project, type Scene, type Settings, type ShootDay, defaultSettings, uid } from "../types";
-import { createDemoProject } from "./demo";
+import { createDemoProject, DEMO_ID } from "./demo";
 
 interface State {
   projects: Project[];
   demoSeeded: boolean;
   seedDemo: () => void;
+  loadDemo: () => void;
   create: (name: string) => string;
   remove: (id: string) => void;
   importProject: (p: Project) => string;
@@ -20,8 +21,9 @@ export const useProjects = create<State>()(persist((set) => ({
   demoSeeded: false,
   seedDemo: () => set((st) => st.demoSeeded ? st : ({
     demoSeeded: true,
-    projects: st.projects.some((p) => p.id === "sintel-demo") ? st.projects : [...st.projects, createDemoProject()],
+    projects: st.projects.some((p) => p.id === DEMO_ID) ? st.projects : [...st.projects, createDemoProject()],
   })),
+  loadDemo: () => set((st) => ({ demoSeeded: true, projects: [createDemoProject(), ...st.projects.filter((p) => p.id !== DEMO_ID)] })),
   create: (name) => {
     const id = uid();
     set((st) => ({ projects: [{ id, name, createdAt: Date.now(), scenes: [], settings: defaultSettings(), days: [] }, ...st.projects] }));

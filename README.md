@@ -5,19 +5,12 @@ and Day-Out-of-Days exports. Projects stay in your browser; export JSON for back
 
 ## Example production
 
-The app includes **Sintel — Opening excerpt**, the two-scene opening from
-*Sintel Draft 4 revision 2* by Esther Wouda, with revisions by Colin Levy.
-© copyright Blender Foundation | durian.blender.org.
-
-- [Original screenplay PDF](https://durian.blender.org/wp-content/uploads/2009/11/1stminute_script_11-61.pdf)
-- [Source licensing statement](https://durian.blender.org/sharing/)
-- [Creative Commons Attribution 3.0](https://creativecommons.org/licenses/by/3.0/)
-
-Whitespace and scene-heading punctuation were normalized for parsing. The seeded
-breakdown includes a reviewed action-only cast appearance. Page lengths, hours,
-rates, and schedule are illustrative estimates, not the film's actual budget.
-The full screenplay is not bundled. The excerpt retains its CC BY 3.0 license,
-including when copied into project exports; it is not relicensed under MIT.
+The app includes the full screenplay of **The Last Screenwriter** (2023), written
+by ChatGPT 4.0 and prompted by Peter Luisi — 63 scenes across 25 locations. It is
+[listed as public domain on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:The_Last_Screenwriter_-_Screenplay.pdf);
+see THIRD_PARTY_NOTICES.md for details. Page lengths, hours, rates and the starting
+schedule are illustrative estimates. Use "Load example screenplay" on the home page
+to (re)load it.
 
 ## License
 

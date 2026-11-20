@@ -1,23 +1,26 @@
 # Third-party content
 
-## Sintel opening screenplay excerpt
+## "The Last Screenwriter" screenplay (example production)
 
-Sintel Draft 4 revision 2, November 6, 2009. Screenplay by Esther Wouda,
-with revisions by Colin Levy. Project Durian, Blender Institute.
+"The Last Screenwriter", screenplay dated 22 December 2023, written by ChatGPT 4.0,
+prompted by Peter Luisi. Spotlight Media Productions AG, Zürich.
 
-© copyright Blender Foundation | durian.blender.org
+Wikimedia Commons lists this file as public domain (a work of a computer algorithm
+without sufficient human authorship for copyright in the United States):
+https://commons.wikimedia.org/wiki/File:The_Last_Screenwriter_-_Screenplay.pdf
 
-Licensed under Creative Commons Attribution 3.0 (CC BY 3.0):
-https://creativecommons.org/licenses/by/3.0/
+Public-domain status may differ outside the United States (for example, the UK and
+Hong Kong give computer-generated works limited protection).
 
-Source PDF: https://durian.blender.org/wp-content/uploads/2009/11/1stminute_script_11-61.pdf
+The full text is bundled. Page numbers, scene-number margins and some hyphens in
+scene headings were normalized for parsing; the PAUL / PAUL DAVIDSON cast cue was
+merged. Scene lengths, schedule and costs are illustrative estimates, not the
+film's actual production data.
 
-Licensing statement: https://durian.blender.org/sharing/
+This content is not covered by the application's MIT license.
 
-Only the publicly released two-scene opening excerpt is included. Whitespace and
-heading punctuation were normalized. Parsed scene lengths and shooting durations
-are estimates. The demo cast was reviewed to include action-only appearances.
-The demo schedule and cost settings are illustrative, not actual production data.
+## Earlier example: Sintel opening excerpt
 
-This content is not covered by the application's MIT license. Preserve this
-attribution when distributing the excerpt or derived scene summaries.
+Older saved copies may still contain the two-scene Sintel excerpt (Sintel Draft 4
+revision 2 by Esther Wouda, revisions by Colin Levy, © Blender Foundation |
+durian.blender.org, CC BY 3.0: https://creativecommons.org/licenses/by/3.0/).

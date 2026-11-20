@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const ready = useStoreReady();
-  const { projects, create, remove, importProject } = useProjects();
+  const { projects, create, remove, importProject, loadDemo } = useProjects();
   const [name, setName] = useState("");
   const nav = useNavigate();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -57,6 +57,7 @@ function Index() {
           placeholder="Production title, e.g. Last Light at the Diner" className="h-12 font-mono" />
         <Button size="lg" className="h-12" onClick={start}><Plus /> New production</Button>
         <Button size="lg" variant="outline" className="h-12" onClick={() => fileRef.current?.click()}><Upload /> Import JSON</Button>
+        <Button size="lg" variant="ghost" className="h-12" onClick={() => { loadDemo(); toast.success("Example production loaded"); }}>Load example screenplay</Button>
         <input ref={fileRef} type="file" accept=".json" hidden onChange={(e) => e.target.files?.[0] && onImport(e.target.files[0])} />
       </section>
 
@@ -81,7 +82,7 @@ function Index() {
       <footer className="mt-10 border-t border-border pt-4 font-mono text-xs text-muted-foreground">
         <a href="/license.txt" className="underline">MIT license · © 2026 Spencer Smith</a>
         <span className="mx-2">·</span>
-        <a href="https://durian.blender.org/sharing/" target="_blank" rel="noreferrer" className="underline">Sintel excerpt: © Blender Foundation · CC BY 3.0</a>
+        <a href="https://commons.wikimedia.org/wiki/File:The_Last_Screenwriter_-_Screenplay.pdf" target="_blank" rel="noreferrer" className="underline">Example: “The Last Screenwriter” screenplay · public domain</a>
       </footer>
     </main>
   );

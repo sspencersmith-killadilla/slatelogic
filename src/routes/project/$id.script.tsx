@@ -82,7 +82,7 @@ function ScriptPage() {
           <div className="text-muted-foreground">Drag it here or choose a file. Re-uploading replaces the scene list.</div>
         </div>
         <Button onClick={() => fileRef.current?.click()} disabled={busy}>{busy ? <Loader2 className="animate-spin" /> : <FileText />} Choose file</Button>
-        <Button variant="outline" onClick={() => load(SAMPLE_SCRIPT, createDemoProject().sourceNotice ?? null)}>Use Sintel excerpt</Button>
+        <Button variant="outline" onClick={() => load(SAMPLE_SCRIPT, createDemoProject().sourceNotice ?? null)}>Use example screenplay</Button>
         <input ref={fileRef} type="file" accept=".pdf,.docx,.doc,.txt,.fountain" hidden onChange={(e) => { const f = e.target.files?.[0]; if (f) void onFile(f); e.target.value = ""; }} />
       </section>
 
